@@ -28,8 +28,11 @@ class WorkerS(Thread):
         return res
     
     def click_list(self):
+        middle=(997,470)
+        pyautogui.click(middle)
         res = False
         for file in self.LFN :
+            print("Searching for" + file)
             res_aux = self.find_click(file,1)
             res = res_aux or res
         return res
@@ -37,12 +40,9 @@ class WorkerS(Thread):
     def run(self):
         print('Sequential Worker Launched')
         while(not self.die):
-            time.sleep(1)
-            middle=(997,470)
-            pyautogui.click(middle)
             res = self.click_list()
             if res :
-                print("Clicked §§")
+                print("Clicked")
             
     def join(self):
         print("Closing Sequential Worker")
