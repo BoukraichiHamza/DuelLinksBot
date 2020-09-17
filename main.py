@@ -31,6 +31,7 @@ def main():
     try :  
         while(True):
             time.sleep(5)
+            
             pyautogui.click(middle)
     except KeyboardInterrupt :
         for w in WL:
