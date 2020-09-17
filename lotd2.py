@@ -24,8 +24,9 @@ w.start()
 WL.append(w)
 try :  
     while(True):
+        #
         time.sleep(1)
-        #pyautogui.press("enter")
+        pyautogui.press("enter")
 except KeyboardInterrupt :
     for w in WL:
         w.join()
