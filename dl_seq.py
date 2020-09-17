@@ -3,7 +3,7 @@ from worker_seq import WorkerS
 import pyautogui
 import time
 import os
-
+middle=(997,470)
 L = []
 for filename in os.listdir("image"):
     L.append("image/"+filename)
@@ -24,7 +24,6 @@ WL.append(w)
 try :  
     while(True):
         time.sleep(1)
-        #pyautogui.press("enter")
 except KeyboardInterrupt :
     for w in WL:
         w.join()

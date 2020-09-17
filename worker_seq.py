@@ -2,6 +2,7 @@
 
 from threading import Thread
 import pyautogui
+import time
 
 
 class WorkerS(Thread):
@@ -23,7 +24,6 @@ class WorkerS(Thread):
             i = i+1
         if (button != None):
             pyautogui.click(button)
-            pyautogui.press("enter")
             res = True
         return res
     
@@ -37,6 +37,9 @@ class WorkerS(Thread):
     def run(self):
         print('Sequential Worker Launched')
         while(not self.die):
+            time.sleep(1)
+            middle=(997,470)
+            pyautogui.click(middle)
             res = self.click_list()
             if res :
                 print("Clicked §§")
