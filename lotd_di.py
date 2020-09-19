@@ -56,6 +56,9 @@ while(True):
         di.press("left")
         time.sleep(0.3)
         di.press("enter")
+    else:
+        pyautogui.click((900,500))
     di.press("enter")
+    
 
 
