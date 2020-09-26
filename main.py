@@ -12,10 +12,27 @@ from queue import Queue
 
 middle=(997,470)
 
-L = []
-for filename in os.listdir("image"):
-    L.append("image/"+filename)
+def make_list(folder):
+    L = []
+    for filename in os.listdir(folder):
+        filename = folder+"/"+filename
+        #Test if new file
+        Split_name = filename.split("_")
+        found = False
+        for f in L:
+            for e in f:
+                split = e.split("_")
+                if split[0] == Split_name[0]:
+                    found = True
+            if found :
+                f.append(filename)
+        if not found :  
+            L.append([filename])       
+    return L
+                    
+L = make_list("image")
 print(L)
+
 def main():
     WL = []
     WQ = []
