@@ -25,7 +25,6 @@ class Worker(Thread):
             i = i+1
         if (button != None):
             res = True
-            self.q.put(res)
             print(button)
             pyautogui.click(button)
         return res
@@ -34,6 +33,7 @@ class Worker(Thread):
         print('Worker Launched for :'+ self.FN)
         while(not self.die):
             res = self.find_click(1)
+            self.q.put(res)
             if res :
                 print(self.FN + "Clicked §§")
             
