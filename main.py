@@ -30,7 +30,7 @@ def make_list(folder):
             L.append([filename])       
     return L
                     
-L = make_list("image")
+L = make_list("event")
 print(L)
 
 def main():
