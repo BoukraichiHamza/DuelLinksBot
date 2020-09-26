@@ -7,15 +7,18 @@ This is a temporary script file.
 from worker import Worker
 import pyautogui
 import time
+import os
+from queue import Queue
 
 middle=(997,470)
-disrup_list = ['ok.png','suivant.png']
-click_list = ['menuskip.png','skipturn.png','duel.png']
 
-L = click_list + disrup_list
-WL = []
-
+L = []
+for filename in os.listdir("image"):
+    L.append("image/"+filename)
+print(L)
 def main():
+    WL = []
+    WQ = []
     print("Starting")
     for i in range(3):
         print(".")
@@ -23,21 +26,26 @@ def main():
     print("Go")
     #Launch script for every image
     for e in L:
+        q = Queue()
         print(e)
-        w = Worker('image/'+e)
+        w = Worker(e,q)
         w.daemon = True
         w.start()
         WL.append(w)
+        WQ.append(q)
     try :  
         while(True):
-            time.sleep(5)
-            
-            pyautogui.click(middle)
+            clicked = False
+            for q in WQ:
+                res_q = q.get()
+                clicked = clicked or res_q
+                print(res_q)
+            if not clicked :
+                pyautogui.click(middle)
+                
     except KeyboardInterrupt :
         for w in WL:
             w.join()
-    # while(True):
-    #     time.sleep(1)
         
 if __name__ =="__main__":
     main()

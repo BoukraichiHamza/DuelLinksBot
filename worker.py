@@ -3,17 +3,18 @@
 
 from threading import Thread
 import pyautogui
-
-
+import time
+from queue import Queue
+middle=(997,470)
 class Worker(Thread):
 
     """Worker to look for event on the screen and click"""
 
-    def __init__(self, FileName):
+    def __init__(self, FileName,q):
         Thread.__init__(self,daemon=True)
         self.FN = FileName
         self.die = False
-        
+        self.q = q
     def find_click(self,n):
         file = self.FN
         res = False
@@ -21,9 +22,9 @@ class Worker(Thread):
         i = 0
         while (button == None) and (i<n):
             button = pyautogui.locateOnScreen(file,confidence=0.7)
-            print(button)
             i = i+1
         if (button != None):
+            print(button)
             pyautogui.click(button)
             res = True
         return res
@@ -34,6 +35,7 @@ class Worker(Thread):
             res = self.find_click(1)
             if res :
                 print(self.FN + "Clicked §§")
+            self.q.put(res)
             
     def join(self):
         print("Closing " + self.FN)
