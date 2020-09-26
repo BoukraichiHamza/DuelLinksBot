@@ -24,9 +24,10 @@ class Worker(Thread):
             button = pyautogui.locateOnScreen(file,confidence=0.7)
             i = i+1
         if (button != None):
+            res = True
+            self.q.put(res)
             print(button)
             pyautogui.click(button)
-            res = True
         return res
     
     def run(self):
@@ -35,7 +36,7 @@ class Worker(Thread):
             res = self.find_click(1)
             if res :
                 print(self.FN + "Clicked §§")
-            self.q.put(res)
+            
             
     def join(self):
         print("Closing " + self.FN)
