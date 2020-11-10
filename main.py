@@ -10,7 +10,7 @@ import time
 import os
 from queue import Queue
 
-middle=(997,470)
+middle=(990,450)
 
 def make_list(folder):
     L = []
@@ -30,7 +30,7 @@ def make_list(folder):
             L.append([filename])       
     return L
                     
-L = make_list("event")
+L = make_list("event_tag")
 print(L)
 
 def main():
